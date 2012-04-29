@@ -1,8 +1,8 @@
 
-Name:       libXft
+Name:       libxft
 Summary:    X.Org X11 libXft runtime library
 Version:    2.2.0
-Release:    1.4
+Release:    2.5
 Group:      System/Libraries
 License:    MIT
 URL:        http://www.x.org/
@@ -41,7 +41,7 @@ xft Development Librariy files
 %patch1 -p1
 
 %build
-
+LDFLAGS+=" -Wl,--hash-style=both -Wl,--as-needed"
 %reconfigure --disable-static
 make %{?jobs:-j%jobs}
 
