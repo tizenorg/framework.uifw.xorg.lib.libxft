@@ -7,6 +7,7 @@ Group:      System/Libraries
 License:    MIT
 URL:        http://www.x.org/
 Source0:    http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.gz
+Source1001: packaging/libxft.manifest 
 Patch1:     100-libXft-2.1.10-lcd-filter-3.patch
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -41,6 +42,7 @@ xft Development Librariy files
 %patch1 -p1
 
 %build
+cp %{SOURCE1001} .
 LDFLAGS+=" -Wl,--hash-style=both -Wl,--as-needed"
 %reconfigure --disable-static
 make %{?jobs:-j%jobs}
@@ -61,6 +63,7 @@ rm -rf %{buildroot}
 
 
 %files
+%manifest libxft.manifest
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING README ChangeLog
 %{_libdir}/libXft.so.2
@@ -68,6 +71,7 @@ rm -rf %{buildroot}
 
 
 %files devel
+%manifest libxft.manifest
 %defattr(-,root,root,-)
 %dir %{_includedir}/X11
 %dir %{_includedir}/X11/Xft
