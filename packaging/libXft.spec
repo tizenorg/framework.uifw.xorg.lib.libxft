@@ -76,4 +76,3 @@ rm -rf $RPM_BUILD_ROOT
 #%{_mandir}/man1/xft-config.1.gz
 #%dir %{_mandir}/man3x
 #%{_mandir}/man3/Xft.3*
-
