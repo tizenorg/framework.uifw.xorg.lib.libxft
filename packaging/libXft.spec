@@ -1,6 +1,6 @@
 Summary: X.Org X11 libXft runtime library
 Name: libXft
-Version: 2.3.1
+Version: 2.3.1.1
 Release: 1
 License: MIT
 Group: System Environment/Libraries
@@ -11,7 +11,7 @@ Source0: %{name}-%{version}.tar.gz
 BuildRequires:  pkgconfig(xorg-macros)
 BuildRequires:  pkgconfig(xproto)
 BuildRequires: pkgconfig(xrender)
-BuildRequires: freetype-devel >= 2.1.9-2
+BuildRequires: freetype-devel >= 2.5.1
 BuildRequires: fontconfig-devel >= 2.2-1
 
 Requires: fontconfig >= 2.2-1
@@ -22,7 +22,7 @@ X.Org X11 libXft runtime library
 %package devel
 Summary: X.Org X11 libXft development package
 Group: Development/Libraries
-Provides: libxft-devel 
+Provides: libxft-devel
 Requires: %{name} = %{version}-%{release}
 
 %description devel
@@ -39,7 +39,8 @@ make %{?jobs:-j%jobs}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
+mkdir -p %{buildroot}/usr/share/license
+cp -af COPYING %{buildroot}/usr/share/license/%{name}
 make install DESTDIR=$RPM_BUILD_ROOT
 
 # FIXME: There's no real good reason to ship these anymore, as pkg-config
@@ -60,7 +61,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING README ChangeLog
+/usr/share/license/%{name}
+#%doc AUTHORS COPYING README ChangeLog
 %{_libdir}/libXft.so.2*
 
 %files devel
